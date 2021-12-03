@@ -1,0 +1,125 @@
+/* .todoItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 20px 0;
+  width: 70%;
+  border-bottom: 1px solid #cecece;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 15px;
+  color: #333333;
+} */
+
+.font-link {
+  font-family: "Black Han Sans", sans-serif;
+  color: whitesmoke;
+}
+.font-link-2 {
+  font-family: "Balsamiq Sans", cursive;
+  color: black;
+}
+.font-link-3 {
+  font-family: "Balsamiq Sans", cursive;
+  color: black;
+}
+#todo-wrapper {
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(500px, auto);
+  background-color: #000000d9;
+  justify-content: center;
+}
+
+.todo-column-1 {
+  grid-auto-columns: 1;
+  grid-row: auto;
+  /* background-color: #264653 */
+}
+.todo-column-2 {
+  grid-column: 2;
+  grid-row: auto;
+  /* background-color: #2a9d8f; */
+}
+.todo-column-3 {
+  grid-column: 3;
+  grid-row: auto;
+  /* background-color: #e9c46a; */
+}
+.todo-column-4 {
+  grid-column: 4;
+  grid-row: auto;
+  /* background-color: #f4a261; */
+}
+.todo-column-5 {
+  grid-column: 5;
+  grid-row: auto;
+  /* background-color: #e76f51; */
+}
+/* @media screen and (max-width: 750px) {
+  .todo-wrapper {
+    display: flex;
+  }
+  .todo-column-1,
+  .todo-column-2,
+  .todo-column-3,
+  .todo-column-4,
+  .todo-column-5 {
+    width: 100%;
+  }
+} */
+/* .card-wrapper {
+  border-radius: 50px;
+} */
+.todoItem {
+  width: 18vw;
+  height: 200px;
+  /* box-shadow: 0px 3px 50px #a5a5a5; */
+  margin-bottom: 10px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border: 10px solid;
+}
+.card-top {
+  width: 100%;
+  height: 2%;
+}
+
+.todoForm {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin: 0;
+  display: flex;
+}
+
+.App-header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+.add {
+  padding-top: 10px;
+  padding-left: 40px;
+}
+.delete {
+  margin-left: 20px;
+}
+/* .delete:hover {
+  color: aquamarine;
+} */
+.urgent {
+  margin-left: 20px;
+}
+.bi-pencil-square:hover {
+  opacity: 0.5;
+}
+.bi-flag:hover {
+  opacity: 0.5;
+}
+.bi-flag-fill:hover {
+  opacity: 0.5;
+}
+.bi-trash-fill:hover {
+  opacity: 0.5;
+}
