@@ -21,7 +21,7 @@ function App() {
   //fetch data from backend server and store it as todoList:
   useEffect(() => {
     axios
-      .get("https://my-todo-task-app.herokuapp.com/api/todoList")
+      .get("/api/todoList")
       .then(res => res.data)
       .then(res => {
         console.log("promise fulfilled")
@@ -37,7 +37,7 @@ function App() {
     const deleteObj = todoList.filter(n => n.id === id)[0]
     window.confirm('Do you confirm to delete this todo item?') ?
       axios
-        .delete(`https://my-todo-task-app.herokuapp.com/api/todoList/${deleteObj.id}`)
+        .delete(`/api/todoList/${deleteObj.id}`)
         .then(() => setTodoList(todoList.filter(n => n.id !== id)))
       :
       alert("this item will not be deleted!")
@@ -74,7 +74,7 @@ function App() {
       category: category
     };
     axios
-      .post("https://my-todo-task-app.herokuapp.com/api/todoList", todoObj)
+      .post("/api/todoList", todoObj)
       .then((res) => {
         setTodoList(todoList.concat(res.data))
       })
@@ -89,14 +89,14 @@ function App() {
     const todo = todoList.find(n => n.id === id)
     const changedTodo = { ...todo, urgent: !todo.urgent }
     axios
-      .put(`https://my-todo-task-app.herokuapp.com/api/todoList/${id}`, changedTodo)
+      .put(`/api/todoList/${id}`, changedTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }
 
   const onUpdateFunc = (id, updateTodo) => {
     axios
-      .put(`https://my-todo-task-app.herokuapp.com/api/todoList/${id}`, updateTodo)
+      .put(`/api/todoList/${id}`, updateTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }

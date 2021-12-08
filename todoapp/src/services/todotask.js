@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = "https://my-todo-task-app.herokuapp.com/api/todoList"
+const baseUrl = "/api/todoList"
 
 const getAll = () => {
     axios
