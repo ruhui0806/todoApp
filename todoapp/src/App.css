@@ -16,47 +16,52 @@
   color: whitesmoke;
 }
 .font-link-2 {
-  font-family: "Balsamiq Sans", cursive;
+  font-family: "Balsamiq Sans", sans-serif;
   color: black;
 }
 .font-link-3 {
-  font-family: "Balsamiq Sans", cursive;
+  font-family: "Balsamiq Sans", sans-serif;
   color: black;
 }
-#todo-wrapper {
+.todo-wrapper {
   padding-top: 15px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(500px, auto);
+  /* display: grid; */
+  /* grid-template-columns: repeat(5, 1fr); */
+  /* grid-auto-rows: minmax(500px, auto); */
   background-color: #000000d9;
-  justify-content: center;
+  /* justify-content: space-evenly; */
 }
 
-.todo-column-1 {
+/* .todo-column-1 {
+  grid-template-columns: 1fr;
   grid-auto-columns: 1;
   grid-row: auto;
-  /* background-color: #264653 */
-}
-.todo-column-2 {
+  background-color: #264653
+} */
+/* .todo-column-2 {
+  grid-template-columns: 1fr;
   grid-column: 2;
   grid-row: auto;
-  /* background-color: #2a9d8f; */
+  background-color: #2a9d8f;
 }
 .todo-column-3 {
+  grid-template-columns: 1fr;
   grid-column: 3;
   grid-row: auto;
-  /* background-color: #e9c46a; */
+  background-color: #e9c46a;
 }
 .todo-column-4 {
+  grid-template-columns: 1fr;
   grid-column: 4;
   grid-row: auto;
-  /* background-color: #f4a261; */
+  background-color: #f4a261;
 }
 .todo-column-5 {
+  grid-template-columns: 1fr;
   grid-column: 5;
   grid-row: auto;
-  /* background-color: #e76f51; */
-}
+  background-color: #e76f51;
+} */
 /* @media screen and (max-width: 750px) {
   .todo-wrapper {
     display: flex;
@@ -73,14 +78,15 @@
   border-radius: 50px;
 } */
 .todoItem {
-  width: 18vw;
+  width: 100%;
   height: 200px;
   /* box-shadow: 0px 3px 50px #a5a5a5; */
-  margin-bottom: 10px;
-  margin-left: 1vw;
-  margin-right: 1vw;
-  border: 10px solid;
+  margin-bottom: 15px;
+  /* margin-left: 1vw;
+  margin-right: 1vw; */
+  /* border: 10px solid; */
 }
+
 .card-top {
   width: 100%;
   height: 2%;
@@ -98,6 +104,7 @@
   padding-bottom: 20px;
   margin: 0;
 }
+
 .add {
   padding-top: 10px;
   padding-left: 40px;

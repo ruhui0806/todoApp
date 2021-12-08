@@ -21,7 +21,7 @@ function App() {
   //fetch data from backend server and store it as todoList:
   useEffect(() => {
     axios
-      .get("http://localhost:8000/todoList")
+      .get("https://my-todo-task-app.herokuapp.com/api/todoList")
       .then(res => res.data)
       .then(res => {
         console.log("promise fulfilled")
@@ -37,7 +37,7 @@ function App() {
     const deleteObj = todoList.filter(n => n.id === id)[0]
     window.confirm('Do you confirm to delete this todo item?') ?
       axios
-        .delete(`http://localhost:8000/todoList/${deleteObj.id}`)
+        .delete(`https://my-todo-task-app.herokuapp.com/api/todoList/${deleteObj.id}`)
         .then(() => setTodoList(todoList.filter(n => n.id !== id)))
       :
       alert("this item will not be deleted!")
@@ -74,7 +74,7 @@ function App() {
       category: category
     };
     axios
-      .post("http://localhost:8000/todoList", todoObj)
+      .post("https://my-todo-task-app.herokuapp.com/api/todoList", todoObj)
       .then((res) => {
         setTodoList(todoList.concat(res.data))
       })
@@ -89,14 +89,14 @@ function App() {
     const todo = todoList.find(n => n.id === id)
     const changedTodo = { ...todo, urgent: !todo.urgent }
     axios
-      .put(`http://localhost:8000/todoList/${id}`, changedTodo)
+      .put(`https://my-todo-task-app.herokuapp.com/api/todoList/${id}`, changedTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }
 
   const onUpdateFunc = (id, updateTodo) => {
     axios
-      .put(`http://localhost:8000/todoList/${id}`, updateTodo)
+      .put(`https://my-todo-task-app.herokuapp.com/api/todoList/${id}`, updateTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }
@@ -118,31 +118,33 @@ function App() {
         category={category} setCategoryFunc={setCategoryFunc}
       />
 
-      <div id="todo-wrapper">
-        <div className="todo-column-1">
-          <h5 className="font-link text-center">Unstart </h5>
-          {UnstartTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
-            onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#006d77" }} />)}
-        </div>
-        <div className="todo-column-2">
-          <h5 className="font-link text-center">In progress </h5>
-          {InProgressTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
-            onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#2A9D8F" }} />)}
-        </div>
-        <div className="todo-column-3">
-          <h5 className="font-link text-center">Complete </h5>
-          {CompleteTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
-            onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#ffb703" }} />)}
-        </div>
-        <div className="todo-column-4">
-          <h5 className="font-link text-center">Overdue </h5>
-          {OverdueTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
-            onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#F4A261" }} />)}
-        </div>
-        <div className="todo-column-5">
-          <h5 className="font-link text-center">Un-grouped </h5>
-          {Ungrouped.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
-            onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#e76f51" }} />)}
+      <div className="todo-wrapper container-fluid">
+        <div className="row justify-content-evenly align-items-start gx-0">
+          <div className="todo-column-1 col-sm-12 col-md-5 col-lg-2 order-sm-1 order-md-1">
+            <h5 className="font-link text-center">Unstart </h5>
+            {UnstartTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
+              onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#006d77" }} />)}
+          </div>
+          <div className="todo-column-2 col-sm-12 col-md-5 col-lg-2 order-sm-2 order-md-2">
+            <h5 className="font-link text-center">In progress </h5>
+            {InProgressTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
+              onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#2A9D8F" }} />)}
+          </div>
+          <div className="todo-column-3 col-sm-12 col-md-5 col-lg-2 order-sm-3 order-md-1">
+            <h5 className="font-link text-center">Complete </h5>
+            {CompleteTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
+              onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#ffb703" }} />)}
+          </div>
+          <div className="todo-column-4 col-sm-12 col-md-5 col-lg-2 order-sm-4 order-md-2">
+            <h5 className="font-link text-center">Overdue </h5>
+            {OverdueTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
+              onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#F4A261" }} />)}
+          </div>
+          <div className="todo-column-5 col-sm-12 col-md-5 col-lg-2 order-sm-5 order-md-1">
+            <h5 className="font-link text-center">Un-grouped </h5>
+            {Ungrouped.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
+              onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#e76f51" }} />)}
+          </div>
         </div>
 
         <NestModal toggleNestModal={toggleNestModal} nestModal={nestModal} category={category}
