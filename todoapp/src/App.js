@@ -18,14 +18,27 @@ function App() {
   const [nestModal, setNestModal] = useState(false);
   const [urgent, setUrgent] = useState(false);
 
-  //fetch data from backend server and store it as todoList:
+  // const baseUrl = "http://localhost:8000todoList" ////this server address is json server
+  // const baseUrl = "http://localhost:8000/api/todoList" // this server address is todoAppBackend server is another file, which is deployed to heroku
+  const baseUrl = "/api/todoList" // Because both the frontend and the backend are at the same address, we can declare baseUrl as a relative URL.
+
+  // Because in development mode the frontend is at the address localhost:3000,
+  // the requests to the backend go to the wrong address localhost:3000/api/notes.
+  // The backend is at localhost:8000. The solution for this problem is to:
+  //add the following declaration to the package.json file of the frontend repository.
+  // "proxy": "http://localhost:3001"
+
+
+
+  //fetch data from server and store it as todoList:
   useEffect(() => {
     axios
-      .get("/api/todoList")
-      .then(res => res.data)
-      .then(res => {
+      .get(baseUrl)
+      .then(response => response.data)
+      .then(result => {
         console.log("promise fulfilled")
-        setTodoList(res)
+        console.log(process.env.NODE_ENV)
+        setTodoList(result)
       })
   }, []) // the code is executed whenever the [] content is changed, namely when the page is refreshed
 
@@ -33,15 +46,6 @@ function App() {
   //   const todo = todoList.find(n => n.id === id)
   //   const changedTodo = { ...todo, complete: !todo.complete }
   // }
-  const handleDeleteFunc = (id) => {
-    const deleteObj = todoList.filter(n => n.id === id)[0]
-    window.confirm('Do you confirm to delete this todo item?') ?
-      axios
-        .delete(`/api/todoList/${deleteObj.id}`)
-        .then(() => setTodoList(todoList.filter(n => n.id !== id)))
-      :
-      alert("this item will not be deleted!")
-  }
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -61,7 +65,6 @@ function App() {
 
   const setCategoryFunc = () => {
     setNestModal(!nestModal)
-
   }
 
   const addTodo = (event) => {
@@ -74,7 +77,7 @@ function App() {
       category: category
     };
     axios
-      .post("/api/todoList", todoObj)
+      .post(baseUrl, todoObj)
       .then((res) => {
         setTodoList(todoList.concat(res.data))
       })
@@ -82,21 +85,29 @@ function App() {
     setDescription("")
     setCategory("Un-grouped")
   }
+  const handleDeleteFunc = (id) => {
+    const deleteObj = todoList.filter(n => n.id === id)[0]
+    window.confirm('Do you confirm to delete this todo item?') &&
+      axios
+        .delete(`${baseUrl}/${deleteObj.id}`)
+        .then(() => setTodoList(todoList.filter(n => n.id !== id)))
+  }
   const handleUrgent = () => {
     setUrgent(!urgent)
   }
+
   const handleUrgentFunc = (id) => {
     const todo = todoList.find(n => n.id === id)
     const changedTodo = { ...todo, urgent: !todo.urgent }
     axios
-      .put(`/api/todoList/${id}`, changedTodo)
+      .put(`${baseUrl}/${id}`, changedTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }
 
   const onUpdateFunc = (id, updateTodo) => {
     axios
-      .put(`/api/todoList/${id}`, updateTodo)
+      .put(`${baseUrl}/${id}`, updateTodo)
       .then((res) => { setTodoList(todoList.map(n => n.id === id ? res.data : n)) })
       .catch(err => console.log(err))
   }
@@ -120,27 +131,27 @@ function App() {
 
       <div className="todo-wrapper container-fluid">
         <div className="row justify-content-evenly align-items-start gx-0">
-          <div className="todo-column-1 col-sm-12 col-md-5 col-lg-2 order-sm-1 order-md-1">
+          <div className="todo-column-1 col-sm-12 col-md-5 col-lg-2 order-lg-1">
             <h5 className="font-link text-center">Unstart </h5>
             {UnstartTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
               onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#006d77" }} />)}
           </div>
-          <div className="todo-column-2 col-sm-12 col-md-5 col-lg-2 order-sm-2 order-md-2">
+          <div className="todo-column-2 col-sm-12 col-md-5 col-lg-2 order-lg-2">
             <h5 className="font-link text-center">In progress </h5>
             {InProgressTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
               onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#2A9D8F" }} />)}
           </div>
-          <div className="todo-column-3 col-sm-12 col-md-5 col-lg-2 order-sm-3 order-md-1">
+          <div className="todo-column-3 col-sm-12 col-md-5 col-lg-2 order-lg-3">
             <h5 className="font-link text-center">Complete </h5>
             {CompleteTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
               onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#ffb703" }} />)}
           </div>
-          <div className="todo-column-4 col-sm-12 col-md-5 col-lg-2 order-sm-4 order-md-2">
+          <div className="todo-column-4 col-sm-12 col-md-5 col-lg-2 order-lg-4">
             <h5 className="font-link text-center">Overdue </h5>
             {OverdueTasks.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
               onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#F4A261" }} />)}
           </div>
-          <div className="todo-column-5 col-sm-12 col-md-5 col-lg-2 order-sm-5 order-md-1">
+          <div className="todo-column-5 col-sm-12 col-md-5 col-lg-2 order-lg-5">
             <h5 className="font-link text-center">Un-grouped </h5>
             {Ungrouped.map(i => <TodoItem key={i.id} item={i} handleUrgency={() => handleUrgentFunc(i.id)} handleDelete={() => handleDeleteFunc(i.id)}
               onUpdate={onUpdateFunc} Topstyle={{ "background-color": "#e76f51" }} />)}
