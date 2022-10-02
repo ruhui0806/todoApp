@@ -1,26 +1,34 @@
 import axios from "axios"
 
-const baseUrl = "http://localhost:8000/api/todoList"
+// const baseUrl = "http://localhost:8000/api/todoList"
+const baseUrl = "api/todoList"
+
+// const baseUrl = process.env.baseUrl
+
+// const getAll = () => {
+//     axios
+//         .get(baseUrl)
+//         .then(res => res.data)
+// }
 
 const getAll = () => {
-    axios
-        .get(baseUrl)
-        .then(res => res.data)
+    const request = axios.get(baseUrl)
+    return request.then(response => response.data)
 }
+
 const post = (todoObj) => {
-    axios
-        .post(baseUrl, todoObj)
-        .then(response => response.data)
+    const request = axios.post(baseUrl, todoObj)
+    return request.then(response => response.data)
 }
+
+
 const update = (id, changedTodo) => {
-    axios
-        .put(`${baseUrl}/${id}`, changedTodo)
-        .then(response => response.data)
+    const request = axios.put(`${baseUrl}/${id}`, changedTodo)
+    return request.then(response => response.data)
 }
 const remove = (deleteObj) => {
-    axios
-        .delete(`${baseUrl}/${deleteObj.id}`)
-        .then(response => response.data)
+    const request = axios.delete(`${baseUrl}/${deleteObj.id}`)
+    return request.then(response => response.data)
 }
 const todoService = {
     getAll,

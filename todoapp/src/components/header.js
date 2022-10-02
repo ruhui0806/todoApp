@@ -10,7 +10,7 @@ const Header = (props) => {
         To-do List
       </h2>
       <br />
-      <button className="btn btn-dark font-link" onClick={props.handleUrgent}>{props.urgent ? "Show All" : "Show Urgent"}  <i className="urgent button" onClick={props.handleUrgent} class={props.urgent ? "bi bi-flag-fill" : "bi bi-flag"}></i></button>
+      <button className="btn btn-dark font-link" onClick={props.handleUrgent}>{props.urgent ? "Show All" : "Show Urgent"}  <i onClick={props.handleUrgent} className={props.urgent ? "bi bi-flag-fill" : "bi bi-flag"}></i></button>
 
     </header>
   )

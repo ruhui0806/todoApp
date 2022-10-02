@@ -46,7 +46,7 @@ const EditTask = (props) => {
                         color="success"
                         onClick={toggleNestModal}
                     >
-                        {category}
+                        {category}, Click to Change
                     </Button>
 
                     <NestModal toggleNestModal={toggleNestModal} nestModal={nestModal} category={category}

@@ -14,11 +14,11 @@ const TodoForm = (props) => {
         // <form style={style} className="text-center" onSubmit={props.addTodo}>
         //     <div style={{ paddingBottom: 10 }}>todo: <input value={props.newTodo} onChange={props.handletoDo} /></div>
         //     {/* <div>Deadline: <input value={props.deadline} onChange={props.handleDeadline} /></div> */}
-        //     <div style={{ paddingBottom: 20 }} className="add" ><button className="btn btn-primary" type="submit" onClick={() => setModal(true)}>Add New todo <i class="bi bi-pen-fill"></i></button></div>
+        //     <div style={{ paddingBottom: 20 }} className="add" ><button className="btn btn-primary" type="submit" onClick={() => setModal(true)}>Add New todo <i className="bi bi-pen-fill"></i></button></div>
         //     <CreateNew modal={modal} toggleModal={toggleModal} onSubmit={props.addTodo} />
         // </form>
         <div style={style} className="todoForm justify-content-center">
-            <div style={{ paddingBottom: 10, paddingLeft: 5, paddingRight: 5 }} className="add" ><button className="btn btn-dark font-link" type="submit" onClick={() => setModal(true)}>Create Task <i class="bi bi-plus-lg"></i></button></div>
+            <div style={{ paddingBottom: 10, paddingLeft: 5, paddingRight: 5 }} className="add" ><button className="btn btn-dark font-link" type="submit" onClick={() => setModal(true)}>Create Task <i className="bi bi-plus-lg"></i></button></div>
             <CreateNew modal={modal} toggleModal={toggleModal} addTodo={props.addTodo}
                 newTitle={props.newTodoTitle} onChangeTitle={props.onChangeTitle}
                 newDescription={props.newDescription} onChangeDescription={props.onChangeDescription}

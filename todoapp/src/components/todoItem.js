@@ -45,9 +45,9 @@ const TodoItem = (props) => {
                 </CardText>
                 {/* style={{ "position": "absolute", "left": "60%", "top": "80%" }} */}
                 <Button color="" className="position-absolute bottom-0 end-0" >
-                    <i className="edit button pull-right" class="bi bi-pencil-square" onClick={() => setModal(true)} ></i>
-                    <i className="urgent button pull-right" onClick={props.handleUrgency} class={props.item.urgent ? "bi bi-flag-fill" : "bi bi-flag"}></i>
-                    <i className="delete button pull-right" onClick={props.handleDelete} class="bi bi-trash-fill"></i>
+                    <i className="bi bi-pencil-square" onClick={() => setModal(true)} ></i>
+                    <i onClick={props.handleUrgency} className={props.item.urgent ? "bi bi-flag-fill" : "bi bi-flag"}></i>
+                    <i onClick={props.handleDelete} className="bi bi-trash-fill"></i>
                 </Button>
             </CardBody>
             <EditTask modal={modal} toggleModal={toggleModal} TodoItem={props.item}
