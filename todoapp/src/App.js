@@ -16,7 +16,7 @@ function App() {
   const [nestModal, setNestModal] = useState(false);
   const [urgent, setUrgent] = useState(false);
 
-  const baseUrl = "api/todoList"
+  const baseUrl = "/api/todoList"
   // const baseUrl = process.env.baseUrl
 
 
